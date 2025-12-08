@@ -1,4 +1,5 @@
 import pytest
+
 from src.processing import filter_by_state, sort_by_date
 from tests.constants import INVALID_TYPE_CASES, INVALID_VALUE_CASES
 

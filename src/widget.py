@@ -10,7 +10,7 @@ def mask_account_card(type_and_number_card: str) -> str:
     list_of_data_card = type_and_number_card.split()
     if len(list_of_data_card) == 0:
         raise ValueError("Неверный формат данных")
-    card_type = ' '.join(list_of_data_card[:-1])
+    card_type = " ".join(list_of_data_card[:-1])
     card_number = list_of_data_card[-1]
     if not str(card_number).isdigit() or not card_type.replace(" ", "").isalpha():
         raise ValueError("Неверный формат данных")
@@ -20,6 +20,7 @@ def mask_account_card(type_and_number_card: str) -> str:
     if card_type in CARD_TYPES:
         mask_number = masks.get_mask_card_number(card_number)
         return f"{card_type} {mask_number}"
+    raise ValueError(f"Неизвестный тип карты или счета: {card_type}")
 
 
 def get_date(date_string: str) -> str:
@@ -40,8 +41,7 @@ def get_date(date_string: str) -> str:
 
 def is_valid_date(date_string: str) -> bool:
     """Получает на вход строку и проверяет корректность введеного года, месяца и дня"""
-    month_days = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-                  7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+    month_days = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
     data = str(date_string)[0:10]
     year_str, month_str, day_str = data.split("-")
     year = int(year_str)

@@ -1,11 +1,14 @@
 import pytest
+
 from src.widget import get_date, mask_account_card
-from tests.constants import (INVALID_LENGTH_CASES,
-                             INVALID_TYPE_CASES,
-                             CARD_TYPES,
-                             VALID_EDGE_CASES_CARD,
-                             VALID_EDGE_CASES_ACCOUNT,
-                             INVALID_VALUE_CASES)
+from tests.constants import (
+    CARD_TYPES,
+    INVALID_LENGTH_CASES,
+    INVALID_TYPE_CASES,
+    INVALID_VALUE_CASES,
+    VALID_EDGE_CASES_ACCOUNT,
+    VALID_EDGE_CASES_CARD,
+)
 
 
 @pytest.mark.parametrize("card_type", CARD_TYPES)
@@ -60,12 +63,16 @@ def test_mask_account_negative_value(negative_number_int):
     assert str(exc_info.value) == "Неверный формат данных"
 
 
-@pytest.mark.parametrize("input_date, expected", [
-    ("2024-03-11T02:26:18.671407", "11.03.2024"),
-    ("2024-12-31T23:59:59.999999", "31.12.2024"),
-    ("2024-01-01T00:00:00.000000", "01.01.2024"),
-    ("2024-03-11", "11.03.2024"),
-    ("2024-03-11Tanything", "11.03.2024")])
+@pytest.mark.parametrize(
+    "input_date, expected",
+    [
+        ("2024-03-11T02:26:18.671407", "11.03.2024"),
+        ("2024-12-31T23:59:59.999999", "31.12.2024"),
+        ("2024-01-01T00:00:00.000000", "01.01.2024"),
+        ("2024-03-11", "11.03.2024"),
+        ("2024-03-11Tanything", "11.03.2024"),
+    ],
+)
 def test_get_date_valid(input_date, expected):
     assert get_date(input_date) == expected
 

@@ -1,5 +1,6 @@
 from src.widget import is_valid_date
 
+
 def filter_by_state(list_of_dict: list[dict[str, str | int]], state: str = "EXECUTED") -> list[dict[str, str | int]]:
     """Функция фильтрующая в соответствии с указанным параметром 'state'"""
     valid_state = ("EXECUTED", "CANCELED")
