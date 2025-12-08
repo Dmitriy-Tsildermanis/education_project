@@ -40,3 +40,16 @@ def test_get_mask_card_number_invalid_type(invalid_type):
     with pytest.raises(TypeError) as exc_info:
         get_mask_card_number(invalid_type)
     assert str(exc_info.value) == "Не верный тип данных"
+
+
+@pytest.mark.parametrize('number_with_spaces', [' 1234567890123456', '1234567890123456 ', ' 1234567890123456 '])
+def test_get_mask_card_number_with_spaces(number_with_spaces):
+    with pytest.raises(TypeError) as exc_info:
+        get_mask_card_number(number_with_spaces)
+    assert str(exc_info.value) == "Не верный тип данных"
+
+
+def test_get_mask_card_number_negative_integer(negative_number_int):
+    with pytest.raises(TypeError) as exc_info:
+        get_mask_card_number(negative_number_int)
+    assert str(exc_info.value) == "Не верный тип данных"
