@@ -7,10 +7,15 @@ def get_mask_card_number(card_number: [int, str]) -> str:
         raise ValueError('Не верный формат данных')
     return f"{str_number[:4]} {str_number[4:6]}** **** {str_number[-4:]}"
 
-def get_mask_account(account_number: int) -> str:
+
+def get_mask_account(account_number: [int, str]) -> str:
     """Функция принимает на вход номер счета и возвращает маску по образцу **ХХХХ, где Х - цифра номера"""
-    digit_list = [digit for digit in str(account_number)]
-    mask_account_number = f"**{''.join(digit_list[-4:])}"
+    str_number = str(account_number)
+    if not str_number.isdigit():
+        raise TypeError('Не верный тип данных')
+    if len(str_number) != 16:
+        raise ValueError('Не верный формат данных')
+    mask_account_number = f"**{str_number[-4:]}"
     return mask_account_number
 
 
