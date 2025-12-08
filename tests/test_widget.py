@@ -1,10 +1,11 @@
 import pytest
 from src.widget import get_date, mask_account_card
 from tests.constants import (INVALID_LENGTH_CASES,
-                             INVALID_ISDIGIT_CASES,
+                             INVALID_TYPE_CASES,
                              CARD_TYPES,
                              VALID_EDGE_CASES_CARD,
-                             VALID_EDGE_CASES_ACCOUNT)
+                             VALID_EDGE_CASES_ACCOUNT,
+                             INVALID_VALUE_CASES)
 
 
 @pytest.mark.parametrize("card_type", CARD_TYPES)
@@ -32,11 +33,18 @@ def test_mask_account_edge_cases(edge_case, expected):
     assert mask_account_card(f"Счет {edge_case}") == f"Счет {expected}"
 
 
-@pytest.mark.parametrize("invalid_type", INVALID_ISDIGIT_CASES)
+@pytest.mark.parametrize("invalid_type", INVALID_TYPE_CASES)
 def test_mask_account_invalid_type(invalid_type):
-    with pytest.raises(TypeError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         mask_account_card(f"Visa {str(invalid_type)}")
-    assert str(exc_info.value) == "Неверный тип данных"
+    assert str(exc_info.value) == "Неверный формат данных"
+
+
+@pytest.mark.parametrize("invalid_value", INVALID_VALUE_CASES)
+def test_mask_account_invalid_value(invalid_value):
+    with pytest.raises(ValueError) as exc_info:
+        mask_account_card(invalid_value)
+    assert str(exc_info.value) == "Неверный формат данных"
 
 
 @pytest.mark.parametrize("invalid_length", INVALID_LENGTH_CASES)
@@ -47,9 +55,9 @@ def test_mask_account_invalid_length(invalid_length):
 
 
 def test_mask_account_negative_value(negative_number_int):
-    with pytest.raises(TypeError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         mask_account_card(f"Visa {str(negative_number_int)}")
-    assert str(exc_info.value) == "Неверный тип данных"
+    assert str(exc_info.value) == "Неверный формат данных"
 
 
 @pytest.mark.parametrize("input_date, expected", [
@@ -64,12 +72,12 @@ def test_get_date_valid(input_date, expected):
 
 @pytest.mark.parametrize("invalid_length", INVALID_LENGTH_CASES)
 def test_get_date_invalid_length(invalid_length):
-    with pytest.raises(TypeError) as exc_info:
+    with pytest.raises(ValueError) as exc_info:
         get_date(invalid_length)
-    assert str(exc_info.value) == "Неверный тип данных"
+    assert str(exc_info.value) == "Неверный формат данных"
 
 
-@pytest.mark.parametrize("invalid_type", INVALID_ISDIGIT_CASES)
+@pytest.mark.parametrize("invalid_type", INVALID_TYPE_CASES)
 def test_get_date_invalid_type(invalid_type):
     with pytest.raises(TypeError) as exc_info:
         get_date(invalid_type)
