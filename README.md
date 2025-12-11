@@ -19,24 +19,11 @@ poetry show         # Покажет что установилось
 ```
 ## Использование:
 
-На данный момент реализовано несколько функций:
-1. get_mask_card_number - Функция принимает на вход номер карты и возвращает маску по образцу ХХХХ ХХ** **** ХХХХ, где Х - цифра номера.
-2. get_mask_account - Функция принимает на вход номер счета и возвращает маску по образцу **ХХХХ, где Х - цифра номера
-3. mask_account_card - Функция принимает на вход строку с типом карты или счетом и её номером. Возвращает строку с типом карты или счетом и маской номера
-4. get_date - Получает на вход строку с датой и возвращает дату по образцу ДД.ММ.ГГГГ
-5. filter_by_state - Функция фильтрующая в соответствии с указанным параметром 'state'
-6. sort_by_date - Функция сортирующая в соответствии с датой и указаным направляенем по убыванию или возрастанию
-7. filter_by_currency - Принимает на вход список словарей, представляющих транзакции.
-    Возвращает итератор, который поочередно выдает транзакции, где валюта операции соответствует заданной.
-8. transaction_descriptions - Генератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
-9. card_number_generator - Генератор номеров банковских карт от стартового значения до конечного.
-    Может генерировать значения от 0000 0000 0000 0001 до 9999 9999 9999 9999.
 
+### Модуль masks.py
 
-### Примеры использования
-
-#### Модуль masks.py
-функция get_mask_card_number:
+#### функция get_mask_card_number:
+Функция принимает на вход номер карты и возвращает маску по образцу ХХХХ ХХ** **** ХХХХ, где Х - цифра номера
 ```python
 number = 1000000000000000
 print(get_mask_card_number(number))
@@ -46,7 +33,8 @@ print(get_mask_card_number(number))
 1000 00** **** 0000
 ```
 ---
-функция get_mask_account:
+#### функция get_mask_account:
+Функция принимает на вход номер счета и возвращает маску по образцу **ХХХХ, где Х - цифра номера
 ```python
 number = 1000000000000000
 print(get_mask_account(number))
@@ -56,8 +44,10 @@ print(get_mask_account(number))
 **0000
 ```
 ---
-#### Модуль widget.py
-функция mask_account_card:
+### Модуль widget.py
+#### функция mask_account_card:
+Функция принимает на вход строку с типом карты или счетом и её номером.
+    Возвращает строку с типом карты или счетом и маской номера
 ```python
 type_and_number_card = "Visa 1234567890123456"
 print(mask_account_card(type_and_number_card))
@@ -67,7 +57,8 @@ print(mask_account_card(type_and_number_card))
 Visa 1234 56** **** 3456
 ```
 ---
-функция get_date:
+#### функция get_date:
+Получает на вход строку с датой и возвращает дату по образцу ДД.ММ.ГГГГ
 ```python
 data = "2019-07-03T18:35:29.512364"
 print(get_date(data))
@@ -77,7 +68,7 @@ print(get_date(data))
 03.07.2019
 ```
 ---
-#### Модуль processing.py
+### Модуль processing.py
 пример тестовых данных:
 ```python
 list_of_dict = [
@@ -88,7 +79,8 @@ list_of_dict = [
     ]
 ```
 ---
-функция filter_by_state:
+#### функция filter_by_state:
+Функция фильтрующая в соответствии с указанным параметром 'state'
 ```python
 state = 'EXECUTED'
 filter_list = filter_by_state(list_of_dict, state)
@@ -101,7 +93,8 @@ for dict_ in filter_list:
 {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}
 ```
 ---
-функция sort_by_date:
+#### функция sort_by_date:
+Функция сортирующая в соответствии с датой и указаным направляенем по убыванию или возрастанию
 ```python
 sort_revers = True
 sorted_list = sort_by_date(list_of_dict, sort_revers)
@@ -117,7 +110,7 @@ for dict_ in sorted_list:
 {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'}
 ```
 ---
-#### Модуль generators.py
+### Модуль generators.py
 пример тестовых данных:
 ```python
 list_of_transactions = [
@@ -159,7 +152,9 @@ list_of_transactions = [
         }]
 ```
 ---
-функция filter_by_currency:
+#### функция filter_by_currency:
+Принимает на вход список словарей, представляющих транзакции.
+    Возвращает итератор, который поочередно выдает транзакции, где валюта операции соответствует заданной
 ```python
 currency_name = "USD"
 list_of_transactions = filter_by_currency(list_of_dict, currency_name)
@@ -196,7 +191,8 @@ from: Счет 5
 to: Счет 6
 ```
 ---
-функция transaction_descriptions:
+#### функция transaction_descriptions:
+Генератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
 ```python
 list_of_descriptions = transaction_descriptions(list_of_transactions)
 for description in list_of_descriptions:
@@ -208,7 +204,9 @@ Test USD 1
 Test USD 2
 ```
 ---
-функция card_number_generator:
+#### функция card_number_generator:
+Генератор номеров банковских карт от стартового значения до конечного.
+    Может генерировать значения от 0000 0000 0000 0001 до 9999 9999 9999 9999.
 ```python
 generator_of_numbers_cards = card_number_generator(1, 5)
 for number_card in generator_of_numbers_cards:

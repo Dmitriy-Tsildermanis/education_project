@@ -97,6 +97,3 @@ list_of_transactions = [
     ]
 
 
-generator_of_numbers_cards = card_number_generator(1, 5)
-for number_card in generator_of_numbers_cards:
-    print(number_card)
