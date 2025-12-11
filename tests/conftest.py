@@ -81,6 +81,11 @@ def valid_dict_of_processing_same_date():
         {"id": 41428829, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
     ]
 
+@pytest.fixture
+def over_max_number_int():
+    return 100_000_000_000_000_000_000
+
+
 
 @pytest.fixture
 def valid_list_of_transactions():
