@@ -83,7 +83,7 @@ def valid_dict_of_processing_same_date():
 
 
 @pytest.fixture
-def transactions_for_currency_filtering():
+def valid_list_of_transactions():
     return [
         # USD транзакции (3 штуки)
         {
@@ -117,7 +117,7 @@ def transactions_for_currency_filtering():
             "operationAmount": {
                 "amount": "300.00",
                 "currency": {"name": "USD"}  # Только name, нет code
-            }, # Без описания операции
+            },  # Без описания операции
             "from": "Счет 5",
             "to": "Счет 6"
         },
@@ -141,8 +141,8 @@ def transactions_for_currency_filtering():
             "operationAmount": {
                 "amount": "500.00",
                 "currency": {"name": "Euro", "code": "EUR"}
-            },
-            "description": "Test EUR 2",
+            },  # Пустая строка в описании
+            "description": "",
             "from": "Счет 9",
             "to": "Счет 10"
         },
@@ -159,7 +159,7 @@ def transactions_for_currency_filtering():
             "from": "Счет 11",
             "to": "Счет 12"
         },
-        # Без валюты (пропустится)
+        # Без валюты
         {
             "id": 7,
             "state": "EXECUTED",
