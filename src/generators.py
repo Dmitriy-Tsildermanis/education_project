@@ -6,7 +6,7 @@ TransactionList: TypeAlias = list[TransactionDict]
 
 def filter_by_currency(transactions: TransactionList, currency_name: str) -> Iterator[TransactionDict]:
     if not isinstance(transactions, list):
-        raise TypeError("Не верный тип данных")
+        raise TypeError("Неверный тип данных")
     for transaction in transactions:
         if not isinstance(transaction, dict):
             continue
@@ -17,3 +17,19 @@ def filter_by_currency(transactions: TransactionList, currency_name: str) -> Ite
 
         if currency.get("name") == currency_name or currency.get("code") == currency_name:
             yield transaction
+    return
+
+
+def transaction_descriptions(transactions: TransactionList) -> Iterator[str]:
+    if not isinstance(transactions, list):
+        raise TypeError("Неверный тип данных")
+    for transaction in transactions:
+        if not isinstance(transaction, dict):
+            continue
+
+        description = transaction.get("description")
+        if not description:
+            continue
+
+        yield description
+    return
