@@ -23,7 +23,7 @@ def filter_by_currency(transactions: TransactionList, currency_name: str) -> Ite
 
 
 def transaction_descriptions(transactions: TransactionList) -> Iterator[str]:
-    """Uенератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди."""
+    """Генератор, который принимает список словарей с транзакциями и возвращает описание каждой операции по очереди."""
     if not isinstance(transactions, list):
         raise TypeError("Неверный тип данных")
     for transaction in transactions:
@@ -55,3 +55,48 @@ def card_number_generator(start: int, end: int) -> Iterator[str]:
         str_digits = str(i)
         str_number = (16 - len_digits) * "0" + str_digits
         yield f"{str_number[:4]} {str_number[4:8]} {str_number[8:12]} {str_number[12:]}"
+
+
+list_of_transactions = [
+        # USD транзакции (3 штуки)
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2023-01-01T00:00:00.000000",
+            "operationAmount": {
+                "amount": "100.00",
+                "currency": {"name": "Доллар США", "code": "USD"}
+            },
+            "description": "Test USD 1",
+            "from": "Счет 1",
+            "to": "Счет 2"
+        },
+        {
+            "id": 2,
+            "state": "EXECUTED",
+            "date": "2023-01-02T00:00:00.000000",
+            "operationAmount": {
+                "amount": "200.00",
+                "currency": {"code": "USD"}  # Только code, нет name
+            },
+            "description": "Test USD 2",
+            "from": "Счет 3",
+            "to": "Счет 4"
+        },
+        {
+            "id": 3,
+            "state": "PENDING",  # Другое состояние, но валюта USD
+            "date": "2023-01-03T00:00:00.000000",
+            "operationAmount": {
+                "amount": "300.00",
+                "currency": {"name": "USD"}  # Только name, нет code
+            },  # Без описания операции
+            "from": "Счет 5",
+            "to": "Счет 6"
+        },
+    ]
+
+
+generator_of_numbers_cards = card_number_generator(1, 5)
+for number_card in generator_of_numbers_cards:
+    print(number_card)
