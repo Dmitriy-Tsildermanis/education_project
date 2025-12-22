@@ -1,56 +1,44 @@
-[project]
-name = "homework-9-2-tsildermanis-dmitriy"
+[tool.poetry]
+name = "homeworks_dmitriy"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Your Name",email = "you@example.com"}
-]
+authors = ["Your Name <you@example.com>"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "pytest (>=9.0.2,<10.0.0)"
-]
+package-mode = false
 
-[tool.poetry]
-packages = [{include = "homework_9"}]
+[tool.poetry.dependencies]
+python = ">=3.12"
+pytest = "^9.0.2"
+
+[tool.poetry.group.lint.dependencies]
+flake8 = "^7.3.0"
+black = "^25.11.0"
+isort = "^7.0.0"
+mypy = "^1.18.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^7.0.0"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[dependency-groups]
-lint = [
-    "flake8 (>=7.3.0,<8.0.0)",
-    "black (>=25.11.0,<26.0.0)",
-    "isort (>=7.0.0,<8.0.0)",
-    "mypy (>=1.18.2,<2.0.0)"
-]
-dev = [
-    "pytest (>=9.0.2,<10.0.0)",
-    "pytest-cov (>=7.0.0,<8.0.0)"
-]
-
 [tool.black]
-# Максимальная длина строки
 line-length = 119
-# Файлы, которые не нужно форматировать
 exclude = '''
-(
-  /(
-      \.eggs
-    | \.git
-    | \.hg
-    | \.mypy_cache
-    | \__pycache__
-    | \.tox
-    | \.venv
-    | dist
-  )/
-)
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \__pycache__
+  | \.tox
+  | \.venv
+  | dist
+)/
 '''
 
 [tool.isort]
-# максимальная длина строки
 line_length = 119
 
 [tool.mypy]
