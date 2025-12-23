@@ -74,7 +74,7 @@ INVALID_TYPE_CASES_WITHOUT_LIST = [
     (),  # пустой кортеж
     None,  # None
     123556,
-    '1234235345'
+    "1234235345",
 ]
 
 # Используется в: generators.py
@@ -82,18 +82,20 @@ VALID_BUT_EMPTY_RETERN = [
     [],
     [[], [[]]],
     [{}, {}],
-    [{
-        "id": 3,
-        "operationAmount": {
-            "currency": {
-                "name": '',
-                "code": ''
-            }, }, }],
-    [{
-        "id": 3,
-        "operationAmount": {
-            "currency": {
-                "name": None,
-                "code": None
-            }, }, }]
+    [
+        {
+            "id": 3,
+            "operationAmount": {
+                "currency": {"name": "", "code": ""},
+            },
+        }
+    ],
+    [
+        {
+            "id": 3,
+            "operationAmount": {
+                "currency": {"name": None, "code": None},
+            },
+        }
+    ],
 ]
