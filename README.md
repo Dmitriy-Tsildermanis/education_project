@@ -221,6 +221,23 @@ for number_card in generator_of_numbers_cards:
 0000 0000 0000 0005
 ```
 ---
+### Модуль decorators.py
+#### декоратор log:
+Декоратор для логирования вызовов функций. Если указан filename, логи пишутся в файл, иначе в консоль.
+```python
+@log()
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+```
+результат в консоли:
+```python
+Function add started with args: (10, 20), {}.
+add ok. Time: 0.0000s
+30
+```
+---
 ## Тестирование
 
 Проект включает комплексные тесты с покрытием кода 95%:
@@ -234,7 +251,7 @@ pytest
 pytest --cov=src --cov-report=term-missing
 
 # С HTML-отчетом
-pytest --cov=src --cov-report=html
+pytest --cov=src --cov-report=html:reports/coverage tests/
 ```
 
 ### Типы используемых тестов:
@@ -244,11 +261,12 @@ pytest --cov=src --cov-report=html
 ✅ **Тесты обработки ошибок** - проверка корректных исключений при невалидных данных  
 
 ### Статистика покрытия:
-- **Общее покрытие**: 95%
+- **Общее покрытие**: 97%
 - **Модуль `masks.py`**: 100%
 - **Модуль `widget.py`**: 91%  
 - **Модуль `processing.py`**: 95%
 - **Модуль `generators.py`**: 100%
+- **Модуль `decorators.py`**: 100%  
 
 ### Особенности тестов:
 - Фикстуры для повторного использования тестовых данных
