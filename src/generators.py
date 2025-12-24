@@ -55,4 +55,3 @@ def card_number_generator(start: int, end: int) -> Iterator[str]:
         str_digits = str(i)
         str_number = (16 - len_digits) * "0" + str_digits
         yield f"{str_number[:4]} {str_number[4:8]} {str_number[8:12]} {str_number[12:]}"
-
