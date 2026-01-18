@@ -1,14 +1,8 @@
 import pytest
 
 from src.masks import get_mask_account, get_mask_card_number
-from tests.constants import (
-    INVALID_LENGTH_CASES,
-    INVALID_NUMBERS_WITH_SPACES,
-    INVALID_TYPE_CASES,
-    INVALID_VALUE_CASES,
-    VALID_EDGE_CASES_ACCOUNT,
-    VALID_EDGE_CASES_CARD,
-)
+from tests.constants import (INVALID_LENGTH_CASES, INVALID_NUMBERS_WITH_SPACES, INVALID_TYPE_CASES,
+                             INVALID_VALUE_CASES, VALID_EDGE_CASES_ACCOUNT, VALID_EDGE_CASES_CARD)
 
 
 def test_get_mask_card_number_valid_int(valid_number_int):
