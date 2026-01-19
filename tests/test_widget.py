@@ -1,14 +1,8 @@
 import pytest
 
 from src.widget import get_date, mask_account_card
-from tests.constants import (
-    CARD_TYPES,
-    INVALID_LENGTH_CASES,
-    INVALID_TYPE_CASES,
-    INVALID_VALUE_CASES,
-    VALID_EDGE_CASES_ACCOUNT,
-    VALID_EDGE_CASES_CARD,
-)
+from tests.constants import (CARD_TYPES, INVALID_LENGTH_CASES, INVALID_TYPE_CASES, INVALID_VALUE_CASES,
+                             VALID_EDGE_CASES_ACCOUNT, VALID_EDGE_CASES_CARD)
 
 
 @pytest.mark.parametrize("card_type", CARD_TYPES)

@@ -1,3 +1,7 @@
+import json
+import tempfile
+from pathlib import Path
+
 import pytest
 
 
@@ -166,3 +170,83 @@ def valid_list_of_transactions():
             "to": "Счет 14",
         },
     ]
+
+
+@pytest.fixture
+def valid_json_file():
+    """Создает временный файл с корректным JSON."""
+    data = [
+        {"id": 1, "amount": 100},
+        {"id": 2, "amount": 200}
+    ]
+
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as file:
+        json.dump(data, file)
+        temp_path = file.name
+
+    yield temp_path
+    Path(temp_path).unlink()
+
+
+@pytest.fixture
+def invalid_json_file():
+    """Создает временный файл с некорректным JSON."""
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as file:
+        file.write('{invalid json}')
+        temp_path = file.name
+
+    yield temp_path
+    Path(temp_path).unlink()
+
+
+@pytest.fixture
+def dict_json_file():
+    """Создает временный файл с корректным JSON, но в виде словаря"""
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as file:
+        json.dump({'key': 'value'}, file)
+        temp_path = file.name
+
+    yield temp_path
+    Path(temp_path).unlink()
+
+
+@pytest.fixture
+def empty_json_file():
+    """Создает временный файл с пустым JSON"""
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as file:
+        json.dump([], file)
+        temp_path = file.name
+
+    yield temp_path
+    Path(temp_path).unlink()
+
+
+@pytest.fixture
+def rub_transaction():
+    """Транзакция в рублях"""
+    return {
+        "operationAmount": {
+            "amount": "1500.75",
+            "currency": {"code": "RUB"}
+        }
+    }
+
+@pytest.fixture
+def usd_transaction():
+    """Транзакция в USD"""
+    return {
+        "operationAmount": {
+            "amount": "100.00",
+            "currency": {"code": "USD"}
+        }
+    }
+
+@pytest.fixture
+def eur_transaction():
+    """Транзакция в EUR"""
+    return {
+        "operationAmount": {
+            "amount": "50.00",
+            "currency": {"code": "EUR"}
+        }
+    }
